@@ -51,7 +51,7 @@ public class Main {
         int housesWithThreeBeds = Integer.parseInt(chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().substring(chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().indexOf("of")+3,chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().indexOf("ads")-1));
 
         //list to store the prices
-//        List<String> priceOfTheHouses = new ArrayList<>();
+        //List<String> priceOfTheHouses = new ArrayList<>();
 
         int count = 1; //to label the add
         //iterate through all the pages
@@ -61,10 +61,10 @@ public class Main {
             WebElement serpItems = chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div.row.lg-g > div.col-12.lg-9 > div"));
             List<WebElement> listItems = serpItems.findElements(By.className("ui-item"));
 
-            //print the price of each list item
+            //print the price of each list item and the validation of the record is attached to it
             for (WebElement item : listItems) {
                 System.out.println("Ad Number "+ count +" Price is : "+item.findElement(By.className("item-info")).getText() + " "+ validatePrice(Integer.parseInt(item.findElement(By.className("item-info")).getText().replace("Rs ", "").replace(",",""))) + " " + validateBeds(Integer.parseInt(item.findElement(By.className("item-meta")).getText().substring(item.findElement(By.className("item-meta")).getText().indexOf("Beds")+6,item.findElement(By.className("item-meta")).getText().indexOf(",")))));
-//                priceOfTheHouses.add(item.findElement(By.className("item-info")).getText()); //just for fun :D
+                //priceOfTheHouses.add(item.findElement(By.className("item-info")).getText()); //just for fun :D
                 count++;
             }
 
@@ -74,9 +74,6 @@ public class Main {
             }
 
         }
-//        System.out.println(priceOfTheHouses);
+        //System.out.println(priceOfTheHouses);
     }
-
-
-
 }
