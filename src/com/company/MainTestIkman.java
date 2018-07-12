@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
 
+public class MainTestIkman {
     public static String validatePrice(int price){
         return price>= 5000000 && price<=7500000? "" : "Not in the price range";
     }
@@ -18,7 +18,8 @@ public class Main {
         return numberOfBeds==3? "" : "Not the chosen number of beds";
     }
 
-    public static void main(String[] args) {
+    @Test
+    public static void testIkman() {
         // set system environment
         System.setProperty("webdriver.chrome.driver", "/Users/thisunpathirage/Downloads/chromedriver");
         WebDriver chromeDriver = new ChromeDriver();
@@ -47,7 +48,7 @@ public class Main {
         chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-3.lg-filter-area > div > div > form > div > div.ui-accordion-item.filter-enum.filter-bedrooms > a")).click();
         chromeDriver.findElement(By.xpath("//*[@id=\"filters2values-3\"]")).click();
 
-        //get the houses with three beds
+        //get the number of houses with three beds
         int housesWithThreeBeds = Integer.parseInt(chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().substring(chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().indexOf("of")+3,chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div:nth-child(1) > div.col-12.lg-9 > div > div > div:nth-child(1) > div > div > div > span")).getText().indexOf("ads")-1));
 
         //list to store the prices
@@ -68,7 +69,7 @@ public class Main {
                 count++;
             }
 
-            if(i!=housesWithThreeBeds/25){ //check for the last page
+            if(i!=housesWithThreeBeds/25){ //check for the last page of the results
                 //next button click
                 chromeDriver.findElement(By.cssSelector("body > div.app-content > div > div.serp-listing > div.ui-panel.is-rounded.serp-panel > div.ui-panel-content.ui-panel-block > div.row.lg-g > div > div > div > div > div > a.col-6.lg-3.pag-next")).click();
             }
@@ -76,4 +77,5 @@ public class Main {
         }
         //System.out.println(priceOfTheHouses);
     }
+
 }
